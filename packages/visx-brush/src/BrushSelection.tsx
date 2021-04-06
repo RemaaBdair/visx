@@ -1,9 +1,9 @@
 /* eslint react/jsx-handler-names: 0 */
-import React from "react";
-import Drag, { HandlerArgs as DragArgs } from "@visx/drag/lib/Drag";
-import { BaseBrushState as BrushState, UpdateBrush } from "./BaseBrush";
+import React from 'react';
+import Drag, { HandlerArgs as DragArgs } from '@visx/drag/lib/Drag';
+import { BaseBrushState as BrushState, UpdateBrush } from './BaseBrush';
 
-const DRAGGING_OVERLAY_STYLES = { cursor: "move" };
+const DRAGGING_OVERLAY_STYLES = { cursor: 'move' };
 
 type MouseHandler = (
   event:
@@ -29,8 +29,7 @@ export type BrushSelectionProps = {
 };
 
 export default class BrushSelection extends React.Component<
-  BrushSelectionProps &
-    Omit<React.SVGProps<SVGRectElement>, keyof BrushSelectionProps>
+  BrushSelectionProps & Omit<React.SVGProps<SVGRectElement>, keyof BrushSelectionProps>
 > {
   static defaultProps = {
     onMouseLeave: null,
@@ -123,9 +122,9 @@ export default class BrushSelection extends React.Component<
                 width={stageWidth}
                 height={stageHeight}
                 fill="transparent"
-                onPointerUp={dragEnd}
-                onPointerMove={dragMove}
-                onPointerLeave={dragEnd}
+                onMouseUp={dragEnd}
+                onMouseMove={dragMove}
+                onMouseLeave={dragEnd}
                 style={DRAGGING_OVERLAY_STYLES}
               />
             )}
@@ -136,24 +135,23 @@ export default class BrushSelection extends React.Component<
               height={height}
               className="visx-brush-selection"
               onPointerDown={disableDraggingSelection ? undefined : dragStart}
-              onPointerLeave={(event) => {
+              onPointerLeave={event => {
                 if (onMouseLeave) onMouseLeave(event);
               }}
-              onPointerMove={(event) => {
+              onPointerMove={event => {
                 dragMove(event);
                 if (onMouseMove) onMouseMove(event);
               }}
-              onPointerUp={(event) => {
+              onPointerUp={event => {
                 dragEnd(event);
                 if (onMouseUp) onMouseUp(event);
               }}
-              onClick={(event) => {
+              onClick={event => {
                 if (onClick) onClick(event);
               }}
               style={{
-                pointerEvents:
-                  brush.isBrushing || brush.activeHandle ? "none" : "all",
-                cursor: disableDraggingSelection ? undefined : "move",
+                pointerEvents: brush.isBrushing || brush.activeHandle ? 'none' : 'all',
+                cursor: disableDraggingSelection ? undefined : 'move',
               }}
               {...selectedBoxStyle}
             />

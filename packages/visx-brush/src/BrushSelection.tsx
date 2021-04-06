@@ -9,6 +9,7 @@ type MouseHandler = (
   event:
     | React.MouseEvent<SVGRectElement, MouseEvent>
     | React.TouchEvent<SVGRectElement>
+    | React.PointerEvent
 ) => void;
 
 export type BrushSelectionProps = {
@@ -122,11 +123,9 @@ export default class BrushSelection extends React.Component<
                 width={stageWidth}
                 height={stageHeight}
                 fill="transparent"
-                onMouseUp={dragEnd}
-                onMouseMove={dragMove}
-                onMouseLeave={dragEnd}
-                onTouchMove={dragMove}
-                onTouchEnd={dragEnd}
+                onPointerUp={dragEnd}
+                onPointerMove={dragMove}
+                onPointerLeave={dragEnd}
                 style={DRAGGING_OVERLAY_STYLES}
               />
             )}
@@ -136,30 +135,22 @@ export default class BrushSelection extends React.Component<
               width={width}
               height={height}
               className="visx-brush-selection"
-              onMouseDown={disableDraggingSelection ? undefined : dragStart}
-              onMouseLeave={(event) => {
+              onPointerDown={disableDraggingSelection ? undefined : dragStart}
+              onPointerLeave={(event) => {
                 if (onMouseLeave) onMouseLeave(event);
               }}
-              onMouseMove={(event) => {
+              onPointerMove={(event) => {
                 dragMove(event);
                 if (onMouseMove) onMouseMove(event);
               }}
-              onMouseUp={(event) => {
+              onPointerUp={(event) => {
                 dragEnd(event);
                 if (onMouseUp) onMouseUp(event);
               }}
               onClick={(event) => {
                 if (onClick) onClick(event);
               }}
-              onTouchStart={disableDraggingSelection ? undefined : dragStart}
-              onTouchMove={(event) => {
-                dragMove(event);
-                if (onMouseMove) onMouseMove(event);
-              }}
-              onTouchEnd={(event) => {
-                dragEnd(event);
-                if (onMouseUp) onMouseUp(event);
-              }}
+              
               style={{
                 pointerEvents:
                   brush.isBrushing || brush.activeHandle ? "none" : "all",

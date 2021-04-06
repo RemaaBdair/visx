@@ -18,7 +18,8 @@ const BRUSH_OVERLAY_STYLES = { cursor: "crosshair" };
 
 type MouseHandlerEvent =
   | React.MouseEvent<SVGRectElement, MouseEvent>
-  | React.TouchEvent<SVGRectElement>;
+  | React.TouchEvent<SVGRectElement>
+  | React.PointerEvent;
 
 export type BaseBrushProps = {
   brushDirection?: "horizontal" | "vertical" | "both";
@@ -414,31 +415,18 @@ export default class BaseBrush extends React.Component<
                 const duration = this.mouseUpTime - this.mouseDownTime;
                 if (onClick && duration < clickSensitivity) onClick(event);
               }}
-              onMouseDown={(event: MouseHandlerEvent) => {
+              onPointerDown={(event: MouseHandlerEvent) => {
                 this.mouseDownTime = Date.now();
                 dragStart(event);
               }}
-              onMouseLeave={(event: MouseHandlerEvent) => {
+              onPointerLeave={(event: MouseHandlerEvent) => {
                 if (onMouseLeave) onMouseLeave(event);
               }}
-              onMouseMove={(event: MouseHandlerEvent) => {
+              onPointerMove={(event: MouseHandlerEvent) => {
                 if (!isDragging && onMouseMove) onMouseMove(event);
                 if (isDragging) dragMove(event);
               }}
-              onMouseUp={(event: MouseHandlerEvent) => {
-                this.mouseUpTime = Date.now();
-                if (onMouseUp) onMouseUp(event);
-                dragEnd(event);
-              }}
-              onTouchStart={(event: MouseHandlerEvent) => {
-                this.mouseDownTime = Date.now();
-                dragStart(event);
-              }}
-              onTouchMove={(event: MouseHandlerEvent) => {
-                if (!isDragging && onMouseMove) onMouseMove(event);
-                if (isDragging) dragMove(event);
-              }}
-              onTouchEnd={(event: MouseHandlerEvent) => {
+              onPointerUp={(event: MouseHandlerEvent) => {
                 this.mouseUpTime = Date.now();
                 if (onMouseUp) onMouseUp(event);
                 dragEnd(event);

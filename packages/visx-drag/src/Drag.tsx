@@ -1,10 +1,6 @@
 /* eslint-disable react/jsx-handler-names */
-import React from "react";
-import useDrag, {
-  UseDrag,
-  UseDragOptions,
-  HandlerArgs as HandlerArgsType,
-} from "./useDrag";
+import React from 'react';
+import useDrag, { UseDrag, UseDragOptions, HandlerArgs as HandlerArgsType } from './useDrag';
 
 export type HandlerArgs = HandlerArgsType;
 
@@ -33,16 +29,7 @@ export default function Drag({
   x,
   y,
 }: DragProps) {
-  const drag = useDrag({
-    resetOnStart,
-    onDragEnd,
-    onDragMove,
-    onDragStart,
-    x,
-    y,
-    dx,
-    dy,
-  });
+  const drag = useDrag({ resetOnStart, onDragEnd, onDragMove, onDragStart, x, y, dx, dy });
 
   return (
     <>

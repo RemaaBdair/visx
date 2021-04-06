@@ -150,7 +150,6 @@ export default class BrushSelection extends React.Component<
               onClick={(event) => {
                 if (onClick) onClick(event);
               }}
-              
               style={{
                 pointerEvents:
                   brush.isBrushing || brush.activeHandle ? "none" : "all",

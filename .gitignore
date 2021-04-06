@@ -17,9 +17,10 @@ logs/
 # Directories
 build/
 coverage/
-node_modules/
+dist/
 esm/
 lib/
+node_modules/
 tmp/
 
 # Custom

@@ -122,9 +122,9 @@ export default class BrushSelection extends React.Component<
                 width={stageWidth}
                 height={stageHeight}
                 fill="transparent"
-                onMouseUp={dragEnd}
-                onMouseMove={dragMove}
-                onMouseLeave={dragEnd}
+                onPointerUp={dragEnd}
+                onPointerMove={dragMove}
+                onPointerLeave={dragEnd}
                 style={DRAGGING_OVERLAY_STYLES}
               />
             )}
